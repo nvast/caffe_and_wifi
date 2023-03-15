@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="mt-5 d-flex justify-content-center">
+  <h1>Caffee and Wifi</h1>
+</div>
+<table class="table mt-5">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Adress</th>
+      <th>Rating</th>
+      <th>Wifi</th>
+      <th>Number of plugs</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for cafe in all_caffes %}
+  <tr>
+    <td>{{ cafe.name }}</td>
+    <td><a href="https://www.google.com/maps/search/?api=1&query={{ cafe.adress }}" target="_blank">{{ cafe.adress }}</a></td>
+    <td>{{ cafe.rating }}</td>
+    <td>{{ cafe.wifi }}</td>
+    <td>{{ cafe.plugs }}</td>
+  </tr>
+{% endfor %}
+
+  </tbody>
+</table>
+
+<div class="mt-5 d-flex justify-content-center">
+  <a href="{{ url_for('add') }}"><button type="button" class="btn btn-warning" >Add coffee</button></a>
+</div>
+
+<div class="d-flex justify-content-center">
+          {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                {% for message in messages %}
+                    <p class="flash-cafe mt-5">{{ message }}</p>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+</div>
+
+{% endblock %}
